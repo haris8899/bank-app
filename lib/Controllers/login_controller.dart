@@ -15,7 +15,7 @@ class LoginController extends GetxController {
   TextEditingController passwordController = TextEditingController();
   late SharedPreferences prefs;
 
-  Future<void> LoginWithEmail(TextEditingController emailController,
+  Future<void> LoginWithUserID(TextEditingController emailController,
       TextEditingController passwordController, BuildContext context) async {
     var headers = {"Content-Type": "application/json"};
     try {
@@ -31,9 +31,8 @@ class LoginController extends GetxController {
         var res = jsonDecode(response.body);
         var token = res["token"];
         prefs = await SharedPreferences.getInstance();
-        print(JwtDecoder.decode(token));
         prefs.setString("token", token);
-        Navigator.of(context).push(
+        Navigator.of(context).pushReplacement(
             MaterialPageRoute(builder: (context) => UserFrame(token: token)));
       } else {
         String error = jsonDecode(response.body)["error"];
@@ -51,5 +50,12 @@ class LoginController extends GetxController {
             );
           });
     }
+  }
+
+  Future<void> logout(BuildContext context) async {
+    prefs = await SharedPreferences.getInstance();
+    prefs.clear();
+    Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (context) => UserFrame(token: null)));
   }
 }

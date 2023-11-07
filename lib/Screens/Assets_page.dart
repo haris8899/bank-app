@@ -14,35 +14,36 @@ class _AssetsPageState extends State<AssetsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text("Assets")),
       body: Container(
         width: double.infinity,
         child: Padding(
-          padding: EdgeInsets.all(Dimensions.height30),
+          padding: EdgeInsets.only(left:Dimensions.height30,right: Dimensions.height30),
           child: Column(
             children: [
-              SizedBox(height: Dimensions.height45,),
+              SizedBox(
+                height: Dimensions.height10,
+              ),
               Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      LargeText(text: "Assets"),
+                      LargeText(text: "Update Assets"),
                       InkWell(
-                        onTap:()=> Navigator.of(context)
-                        .push(
-                          MaterialPageRoute(
-                            builder: (context)=>TakePictureController()
-                          )
-                        ),
+                        onTap: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) => TakePictureController())),
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.blue,
-                            borderRadius: BorderRadius.circular(Dimensions.BorderRadius15),
+                            borderRadius: BorderRadius.circular(
+                                Dimensions.BorderRadius15),
                           ),
                           padding: EdgeInsets.all(Dimensions.height10),
-                          child: LargeText(text: "Take Picture",color: Colors.white,),
+                          child: Icon(Icons.camera_alt_outlined,color: Colors.white,)
                         ),
-                      )
+                      ),
                     ],
                   )
                 ],

@@ -21,7 +21,7 @@ class _TakePictureControllerState extends State<TakePictureController> {
           name: '0',
           lensDirection: CameraLensDirection.back,
           sensorOrientation: 1),
-      ResolutionPreset.low,
+      ResolutionPreset.medium,
     );
     _initializeControllerFuture = _controller.initialize();
   }
@@ -35,6 +35,7 @@ class _TakePictureControllerState extends State<TakePictureController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(backgroundColor: Colors.black,foregroundColor: Colors.white,),
       extendBodyBehindAppBar: true,
       body: Container(
         decoration: BoxDecoration(color: Colors.black),

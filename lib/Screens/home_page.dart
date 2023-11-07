@@ -1,6 +1,7 @@
 import 'package:bank_flutter/CameraManagement/take_picture_controller.dart';
+import 'package:bank_flutter/Controllers/login_controller.dart';
 import 'package:bank_flutter/Screens/Assets_page.dart';
-import 'package:bank_flutter/itemsWidgets/CameraWidget.dart';
+import 'package:bank_flutter/HomeitemTiles/CameraWidget.dart';
 import 'package:bank_flutter/utils/dimensions.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,10 +26,27 @@ class HomePage extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(
-                "Dashboard",
-                style: TextStyle(
-                    color: Colors.white, fontSize: Dimensions.height30),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Dashboard",
+                    style: TextStyle(
+                        color: Colors.white, fontSize: Dimensions.height30),
+                  ),
+                  InkWell(
+                    onTap: ()async => await LoginController().logout(context),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(Dimensions.BorderRadius15),
+                      ),
+                      padding: EdgeInsets.all(Dimensions.height10),
+                      child: Icon(Icons.logout,
+                      )
+                    ),
+                  ),
+                ],
               ),
               SizedBox(
                 height: Dimensions.height10,

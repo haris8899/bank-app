@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:bank_flutter/Controllers/upload_image_controller.dart';
 import 'package:bank_flutter/utils/api_endpoints.dart';
 import 'package:bank_flutter/utils/dimensions.dart';
 import 'package:bank_flutter/widgets/large_text.dart';
@@ -15,7 +16,7 @@ class DisplayPictureScreen extends StatelessWidget {
   void uploadimage(File file) async {
     String base64image = base64Encode(file.readAsBytesSync());
     var headers = {"Content-Type": "application/json"};
-    print(base64image);
+    print(file.path);
     String filename = file.path.split('/').last;
     print(filename);
     var Url = ApiEndpoints.baseUrl + ApiEndpoints.authEndPoints.uploadimage;
@@ -63,9 +64,7 @@ class DisplayPictureScreen extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: () async {
-              uploadimage(File(imagePath));
-            },
+            onTap: () async => await UploadImageController().imageUpload(imagePath),
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.blue,
