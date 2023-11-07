@@ -1,14 +1,19 @@
+import 'package:bank_flutter/user_management/user_frame.dart';
 import 'package:bank_flutter/user_management/user_login.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(const MyApp());
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var token = prefs.getString("token");
+  runApp(MyApp(token: token,));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final token;
+  MyApp({super.key, required this.token});
 
   @override
   Widget build(BuildContext context) {
