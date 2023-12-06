@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var Items = [CameraWidget(), Text("Inventory"), Text("Financial")];
+    var Items = [CameraWidget(), Text("Inventory"), Text("Financial"),Text("Branch Data")];
     var ItemClick = [AssetsPage()];
     return Scaffold(
         body: Container(

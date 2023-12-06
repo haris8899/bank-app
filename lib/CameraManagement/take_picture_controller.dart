@@ -21,7 +21,7 @@ class _TakePictureControllerState extends State<TakePictureController> {
           name: '0',
           lensDirection: CameraLensDirection.back,
           sensorOrientation: 1),
-      ResolutionPreset.medium,
+      ResolutionPreset.high,
     );
     _initializeControllerFuture = _controller.initialize();
   }
