@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var Items = [CameraWidget(), Text("Inventory"), Text("Financial"),Text("Branch Data")];
-    var ItemClick = [AssetsPage()];
+    var ItemClick = ["/Assets"];
     return Scaffold(
         body: Container(
       decoration: BoxDecoration(color: Colors.blue[700]),
@@ -73,7 +73,7 @@ class HomePage extends StatelessWidget {
                   itemCount: Items.length,
                   itemBuilder: (context, int index) {
                     return InkWell(
-                      onTap:()=> Navigator.of(context).push(MaterialPageRoute(builder: (context)=> ItemClick[index])),
+                      onTap:()=> Navigator.of(context).pushNamed(ItemClick[index]),
                       child: Container(
                         padding: EdgeInsets.all(Dimensions.height20),
                         margin: EdgeInsets.all(Dimensions.height10),

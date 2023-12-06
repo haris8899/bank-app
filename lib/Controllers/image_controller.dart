@@ -33,8 +33,7 @@ class ImageController extends GetxController {
                   ],
                 );
               })
-          .then((value) => Navigator.of(Get.context!).pushReplacement(
-              MaterialPageRoute(builder: (context) => AssetsPage())));
+          .then((value) => Navigator.of(Get.context!).popUntil(ModalRoute.withName('/Assets')));
     }
   }
 
@@ -72,5 +71,35 @@ class ImageController extends GetxController {
             );
           });
     }
+  }
+
+  Future<List<dynamic>> getImageList() async {
+    List<dynamic> list = [];
+    var headers = {"Content-Type": "application/json"};
+    try {
+      var url = Uri.parse(
+          ApiEndpoints.baseUrl + ApiEndpoints.imageEndpoints.getallimage);
+      http.Response response = await http.get(url, headers: headers);
+      if (response.statusCode == 200) {
+        List<dynamic> data = jsonDecode(response.body);
+        list = data;
+      } else {
+        String error = jsonDecode(response.body)["error"];
+        print(error);
+        throw error;
+      }
+    } catch (e) {
+      Get.back();
+      showDialog(
+          context: Get.context!,
+          builder: (context) {
+            return SimpleDialog(
+              title: Text(" Database Error"),
+              contentPadding: EdgeInsets.all(Dimensions.height20),
+              children: [Text(e.toString())],
+            );
+          });
+    }
+    return list;
   }
 }

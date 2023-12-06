@@ -1,3 +1,5 @@
+import 'package:bank_flutter/Screens/Assets_page.dart';
+import 'package:bank_flutter/Screens/home_page.dart';
 import 'package:bank_flutter/user_management/user_frame.dart';
 import 'package:bank_flutter/user_management/user_login.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +20,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      routes: {
+        '/Assets': (context)=>AssetsPage(),
+      },
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(

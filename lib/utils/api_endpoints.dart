@@ -12,4 +12,5 @@ class _AuthEndPoints {
 class _ImageEndpoints {
   final String uploadimage = "/image/upload";
   final String addimage = "/image/add";
+  final String getallimage = "/image/getall";
 }
