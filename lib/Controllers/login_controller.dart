@@ -18,6 +18,16 @@ class LoginController extends GetxController {
   Future<void> LoginWithUserID(TextEditingController emailController,
       TextEditingController passwordController, BuildContext context) async {
     var headers = {"Content-Type": "application/json"};
+    showDialog(
+        barrierDismissible: false,
+        context: context,
+        builder: (context) {
+          return SimpleDialog(
+            title: Text("loading"),
+            contentPadding: EdgeInsets.all(Dimensions.height20),
+            children: [CircularProgressIndicator()],
+          );
+        });
     try {
       var url = Uri.parse(
           ApiEndpoints.baseUrl + ApiEndpoints.authEndPoints.loginMail);
@@ -25,8 +35,15 @@ class LoginController extends GetxController {
         "userId": emailController.text.trim(),
         "password": passwordController.text,
       };
-      http.Response response =
-          await http.post(url, body: jsonEncode(body), headers: headers);
+      http.Response response = await http
+          .post(url, body: jsonEncode(body), headers: headers)
+          .timeout(
+        const Duration(seconds: 5),
+        onTimeout: () {
+          Navigator.pop(context);
+          return http.Response('Internal server error', 500);
+        },
+      );
       if (response.statusCode == 200) {
         var res = jsonDecode(response.body);
         var token = res["token"];
@@ -56,6 +73,6 @@ class LoginController extends GetxController {
     prefs = await SharedPreferences.getInstance();
     prefs.clear();
     Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => UserFrame(token: null)));
+        MaterialPageRoute(builder: (context) => UserFrame(token: null)));
   }
 }
